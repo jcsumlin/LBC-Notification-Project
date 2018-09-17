@@ -1,16 +1,18 @@
-import configparser
-from notify import Notify
-import LocalBitcoin
+# import configparser
 import os
 import time
 
-config = configparser.ConfigParser()
-config.read('auth.ini')
-api_key = str(config.get('auth', 'notify_my_android'))
-# hmac_auth_key = os.environ['hmac_auth_key']
-hmac_auth_key = str(config.get('auth', 'hmac_auth_key'))  # REQUIRED
-# hmac_auth_secret = os.environ['hmac_auth_secret']
-hmac_auth_secret = str(config.get('auth', 'hmac_auth_secret'))  # REQUIRED
+import LocalBitcoin
+from notify import Notify
+
+# config = configparser.ConfigParser()
+# config.read('auth.ini')
+# api_key = str(config.get('auth', 'notify_my_android'))
+api_key = os.environ['notify_my_android']
+hmac_auth_key = os.environ['hmac_auth_key']
+# hmac_auth_key = str(config.get('auth', 'hmac_auth_key'))  # REQUIRED
+hmac_auth_secret = os.environ['hmac_auth_secret']
+# hmac_auth_secret = str(config.get('auth', 'hmac_auth_secret'))  # REQUIRED
 
 n = Notify(api_key)
 lc = LocalBitcoin.LocalBitcoin(hmac_auth_key, hmac_auth_secret, False)
