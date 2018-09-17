@@ -32,7 +32,6 @@ def update_files(notifications_sent):
 
 def main():
     messages = lc.getRecentMessages()
-    notifications = lc.getNotifications()
     for message in messages['message_list']:
         message_info = str(message['created_at']) + ' ' + str(message['contact_id']) + ' ' + str(message['sender']['name'])
         message_author = str(message['sender']['username'])
