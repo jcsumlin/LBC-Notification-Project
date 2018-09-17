@@ -6,13 +6,12 @@ from pushover import init, Client
 
 import LocalBitcoin
 
-init(os.environ['pushover_key'])
-pushover = Client(os.environ['pushover_client_key'])
-
-
-
 # config = configparser.ConfigParser()
 # config.read('auth.ini')
+init(os.environ['pushover_key'])
+# init(config.get('auth', 'pushover_key'))
+pushover = Client(os.environ['pushover_client_key'])
+# pushover = Client(config.get('auth', 'pushover_client_key'))
 # api_key = str(config.get('auth', 'notify_my_android'))
 # api_key = os.environ['notify_my_android']
 hmac_auth_key = os.environ['hmac_auth_key']
@@ -47,14 +46,14 @@ def main():
                 if str(message['msg'].encode('utf-8')) == '':
                     message_contents = 'Message Field Is Empty'
                     if 'attachment_url' in message:
-                        pushover.send(message_contents, title=message['sender']['name'] + ' - ' + str(message['contact_id']), url=message['attachment_url'])
+                        pushover.send_message(message_contents, title=message['sender']['name'] + ' - ' + str(message['contact_id']), url=message['attachment_url'])
                 else:
                     if 'attachment_url' in message:
                         message_contents = str(message['msg'].encode('utf-8'))
-                        pushover.send(message_contents, title=message['sender']['name'] + ' - ' + str(message['contact_id']), url=message['attachment_url'])
+                        pushover.send_message(message_contents, title=message['sender']['name'] + ' - ' + str(message['contact_id']), url=message['attachment_url'])
                     else:
                         message_contents = str(message['msg'].encode('utf-8'))
-                        pushover.send(message_contents, title=message['sender']['name'] + ' - ' + str(message['contact_id']))
+                        pushover.send_message(message_contents, title=message['sender']['name'] + ' - ' + str(message['contact_id']))
                 # n.notify(str(message['sender']['name']) + ' - ' + str(message['contact_id']), message_contents)
                 print("------\nMessage Sent\n")
             elif message_author == "J_C":
