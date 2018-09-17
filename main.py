@@ -7,7 +7,7 @@ from pushover import init, Client
 import LocalBitcoin
 
 init(os.environ['pushover_key'])
-pushover = Client(os.environ['pushover_client_key']).send_message("Hello!", title="Hello")
+pushover = Client(os.environ['pushover_client_key'])
 
 
 
