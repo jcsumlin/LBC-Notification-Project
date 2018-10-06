@@ -38,7 +38,8 @@ def update_files(notifications_sent):
 def main():
     messages = lc.getRecentMessages()
     for message in messages['message_list']:
-        message_info = str(message['created_at']) + ' ' + str(message['contact_id']) + ' ' + str(message['sender']['name'])
+        message_info = '{0}|{1}|{2}'.format(str(message['created_at']), str(message['contact_id']),
+                                            str(message['sender']['name']))
         message_author = str(message['sender']['username'])
         if message_info not in notifications_sent:
             if message_author != "J_C":
