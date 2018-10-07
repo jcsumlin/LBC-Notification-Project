@@ -1,6 +1,7 @@
 # import configparser
 import os
 import time
+from datetime import datetime, timedelta
 
 from pushover import init, Client
 
@@ -41,7 +42,8 @@ def main():
         message_info = '{0}|{1}|{2}'.format(str(message['created_at']), str(message['contact_id']),
                                             str(message['sender']['name']))
         message_author = str(message['sender']['username'])
-        if message_info not in notifications_sent:
+        sent_data = datetime.strptime(str(message['created_at']), '%Y-%m-%dT%H:%M:%S+00:00')
+        if message_info not in notifications_sent and sent_data < (datetime.now()-timedelta(minutes=2)):
             if message_author != "J_C":
                 print(str(message['sender']['username']))
                 if str(message['msg'].encode('utf-8')) == '':
