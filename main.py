@@ -58,7 +58,7 @@ def main():
                         message_contents = str(message['msg'].encode('utf-8'))
                         pushover.send_message(message_contents, title=message['sender']['name'] + ' - ' + str(message['contact_id']))
                 # n.notify(str(message['sender']['name']) + ' - ' + str(message['contact_id']), message_contents)
-                print("------\nMessage Sent\n")
+                print("------\nMessage Sent")
             elif message_author == "J_C":
                 print("------\nMessage From Me")
             notifications_sent.append(message_info)
@@ -68,7 +68,7 @@ def main():
 try:
     while True:
         main()
-        print("------\nIdling for 20s\n")
+        print("------\nIdling for 20s")
         time.sleep(20)
 except Exception:
     pass
